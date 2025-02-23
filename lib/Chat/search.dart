@@ -14,29 +14,27 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final TextEditingController _search = TextEditingController();
-  List<dynamic> _searchResults = []; // Изменено на List<Profile>
-  bool _isLoading = false; // Индикатор загрузки
+  List<dynamic> _searchResults = [];
+  bool _isLoading = false;
 
   Future<void> _searchPeople(String peopleToFind) async {
-    if (peopleToFind.isEmpty) return; // Проверка на пустой ввод
+    if (peopleToFind.isEmpty) return;
 
     setState(() {
-      _isLoading = true; // Установка индикатора загрузки
+      _isLoading = true
     });
 
     try {
       final response = await clientInfo!.searchUserDirectory(peopleToFind);
       setState(() {
         _searchResults =
-            response.results; // Предполагаем, что results — это List<Profile>
+            response.results; 
       });
     } catch (e) {
-      // Обработка ошибок
       print('Ошибка при поиске: $e');
-      // Можно показать сообщение об ошибке пользователю
     } finally {
       setState(() {
-        _isLoading = false; // Сброс индикатора загрузки
+        _isLoading = false;
       });
     }
   }
